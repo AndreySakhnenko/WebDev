@@ -1,0 +1,493 @@
+/* для начала скиним все margin и padding для всех элиментов*/
+*,h1,h2,h3,h4,h5,h6,p,ul,a{
+    margin: 0;
+    padding: 0;
+}
+/*Установим для всех элиментов значения box-sizing: border-box; */
+*,
+*:before,
+*:after{
+    box-sizing: border-box;
+    /*Тогда такие свойства как ширина и высота херис и вейд у них также будут влючены padding и border*/
+}
+/*Чтобы ничего не вылазило за границы элиментов и не появлялся горизонтальный скрол на странице*/
+html, body{
+    overflow-x: hidden;
+}
+
+body{
+    font-family: "Open Sans", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #666;
+    /* for sticy footer*/
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main{
+    flex: 1;
+}
+/*Создадим стили для <li>*/
+a{
+  color: #4a90e2;
+    text-decoration: none;/*не будет подчеркивание <li>*/
+    transition: all, .3s ease;
+}
+/*Для тех линков(<li>) что не используют клас batton при навидение мышки цвет будет миняться*/
+a:not(.btn):hover{
+    color: #4872a2;
+}
+/*Если посмотреть на сайт то можна увидеть что после нашего параграфа (<p>) после текста есть <li> то тут какраз расписываеться что когда <li> после <p> розмер этого <li> должен быть 12 px font-weight 700 */
+p + a:not(.btn){
+    font-size: 13px;
+    font-weight: 700;
+    /*Это нужно для того что б не накидывать лишние класы*/
+}
+/*Установим значение для наших заголовков*/
+h1,h2,h3,h4,h5,h6{
+    line-height: 1.25;
+    font-weight: 300;
+    color: #252525;
+}
+/*Рaзмеры для мобильних устройств*/
+h1{
+    font-size: 34px;
+}
+h2{
+    font-size: 28px;
+}
+h3{
+    font-size: 22px;
+}
+h4{
+    font-size: 18px;
+}
+
+/* Медіа Кверис( для  устройств с большим екраном*/
+@media (min-width: 992px) {
+    h1{
+        font-size: 44px;
+    }
+    h2{
+        font-size: 33px;
+    }
+    h3{
+        font-size: 26px;
+    }
+    h4{
+        font-size: 20px;
+    }
+}
+
+img{
+    max-width: 100%;
+}
+
+label{
+    display: inline-block;
+    font-size: 12px;
+    color: #666666;
+    margin-bottom: 3px;
+}
+
+textarea{
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 200px;
+    min-height: 50px;
+}
+
+                                                /* Global */
+
+/*Теперь приступим к созданию каких-то универсальных класов (к примеру контейнер)*/
+/* Дадим значение Global - єто глобальные универсальные класы*/
+
+.container{
+    max-width: 1280px; /* max ширина */
+    width: 100%; /*Шырина на 100% что б он ростягивался*/
+    margin: 0 auto; /* 0 это верх и низ, а слева и справа auto  и таким вот способом мы росположим контейнер по центру*/
+    padding-right: 15px;
+    padding-left: 15px;
+}
+/*Напишем сразу клас lead*/
+.lead{
+    font-size: 16px;
+    color: #808080;
+    font-weight: 300;
+}
+@media (min-width: 992px) {
+    .lead{
+        font-size: 19px;
+    }
+}
+
+.section-padding{
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.section-grey{
+    border-top: 1px solid #ebebeb;
+    background-color: #fafafa;
+}
+
+.img-shadow{
+    box-shadow: 0 23px 40px rgba(0, 0, 0, .2);
+}
+
+.img-rounded{
+    border-radius: 6px;
+}
+/* В About header не по центру потому что у нас стоит margin-bottom который нужно убрать и поэтому мы пишем ещо 1 клас в универсальный (Global)*/
+.mb-0{
+    margin-bottom: 0 !important;
+}
+                                            /*Buttons создание кнопки*/
+
+.btn{   /*создаем скилет кнопки Button*/
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /*отцентрируюе текст кнопки по центру*/
+    height: 42px;
+    border-radius: 6px;
+    padding: 5px 35px;
+    transition: 0.1s linear;
+}
+/* После .btn мы видим что нет никакова цвета поэтому добавим клас.btn-primery */
+.btn-primery{
+    background-color: #4a90e2;
+    color: #fff;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+/*Дальше Добавим стиль при навидение мышки*/
+.btn-primery:hover{
+    background-color: #609de6;
+    transform: translate3d(0, -2px, 0); /* При наведение на кнопку она немного поднимаетсья*/
+}
+
+                                                        /* 2)Navbar */
+/*После .btn приступаем к navigation-bar(Navbar)*/
+.navbar{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 66px;
+    z-index: 2;
+}
+.navbar > .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/*Далие сделаем стили для логотипа который находися в navbar*/
+.navbar-brand img{
+    max-width: 160px;
+}
+.navbar-nav{
+    margin-left: auto;
+}
+/* Дальше создаем стили для наших  линков <li>*/
+.navbar-nav ul{
+    display: flex;
+    list-style: none;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.navbar-nav li{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+/* Теперь нужно стилезовать наши сылки которые находяться в .navbar-nav*/
+.navbar-nav li a{
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    opacity: 60%;
+    letter-spacing: .0px;
+    transition: opacity .3s ease;
+}
+/*Дальше добавляем стили при навидении*/
+.navbar-nav li a:hover{
+    color: #fff;
+    opacity: 1;
+}
+/*Дальше пишем стили для мобильных дивайсов*/
+@media (max-width: 500px) { /* до 500px  у нас будет весь контетн в navbar по центру*/
+    .navbar-brand{
+        max-width: 100%;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+    /* Дальше немного уменьшаем розмер логотипа*/
+    .navbar-brand img{
+        max-width: 130px;
+    }
+    .navbar-nav{
+        margin: 0 auto;
+    }
+}
+                                                /* 1)Hero */
+.hero{
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 70vh; /*min висота будет 70 вю порт хейс*/
+    padding-top: 80px;
+    padding-bottom: 80px;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero.hero-sm{
+    min-height: 40vh;
+}
+
+.hero:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #252525;
+    opacity: .5;
+}
+
+.hero .container{
+    position: relative;
+    max-width: 800px;
+}
+
+.hero h1{
+    margin-bottom: 24px;
+    color: #fff;
+}
+
+.hero p{
+    margin-bottom: 35px;
+    font-weight: 300;
+    opacity: .8;
+    color: #fff;
+}
+
+                                                    /* 4)Service Section */
+
+.service{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.service-col{
+    max-width: 100%;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 30px;
+}
+
+.service{
+    padding: 25px;
+    border: 1px solid #ececec;
+    border-radius: 1px;
+}
+
+.service img{
+    opacity: 60%;
+    max-width: 70px;
+    margin-bottom: 24px;
+}
+
+.service h4{
+    font-weight: 400;
+    margin-bottom: 12px;
+}
+
+.service p{
+    max-width: 280px;
+    margin: 0 auto 30px auto;
+    font-size: 13px;
+    line-height: 1.7;
+}
+@media (min-width: 768px) {
+    .service-col{
+        max-width: calc(100% / 3);
+        width: 100%;
+        margin-bottom: 0;
+    }
+}
+
+
+                                                    /* 5)Split Section */
+
+.split-section{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.split-section__image{
+    order: -1;
+    margin-bottom: 40px;
+}
+
+.split-section__image,
+.split-section__text{
+    max-width: 100%;
+    width: 100%;
+}
+
+.split-section h2{
+    margin-bottom: 30px;
+}
+
+.split-section p{
+    margin-bottom: 30px;
+}
+
+@media (min-width: 768px) {  /* стили для планшетов и выше*/
+    .split-section{
+        margin-left: -25px;
+        margin-right: -25px;
+    }
+
+    .split-section__image{
+        order: initial;
+        margin-bottom: 0;
+    }
+
+    .split-section__image,
+    .split-section__text{
+        max-width: 50%;
+        width: 50%;
+        padding-right: 25px;
+        padding-left: 25px;
+    }
+}
+
+                                        /* ( на 3 странице) Contact Form Section */
+
+.container-form{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -25px;
+    margin-right: -25px;
+}
+
+.contact-form__info,
+.contact-form__form{
+    padding-right: 25px;
+    padding-left: 25px;
+}
+
+.contact-form__info{
+    order: -1;
+    margin-bottom: 3opx;
+}
+
+@media (min-width: 768px) {
+    .contact-form__info,
+    .contact-form__form{
+    max-width: 50%;
+        width: 100%;
+    }
+
+    .contact-form__info{
+        order: initial;
+        margin-bottom: 0;
+    }
+}
+
+                                                        /*Form(contact*/
+
+.form-control{
+    width: 100%;
+    font-size: 16px;
+    background-color: #fcfcfc;
+    padding: 5px 15px;
+    border-radius: 6px;
+    border: 1px solid #ececec;
+    -webkit-appearance: none; /* Нужно для того что бы наш Импут не наследовал дефолдные стили на веб кид браузерах( Сафари и другие)*/
+}
+
+.form-control:not(textarea){ /* Почему мы тут написали "not(textarea)" - потому что textarea можеть быть высотой больше чем 44px все остальные импуты должны быть 44px*/
+    heigth:44px;
+}
+
+textarea.form-control{
+    padding-top: 10px;
+}
+
+.form-layout{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+@media (min-width: 768px) {
+    .form-col-50{
+        max-width: 50%;
+        width: 100%;
+    }
+}
+
+[class*='form-col']{    /* Спомощю даной записи мы выбираем все класы у которых form-col имееться в название класа */
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 15px;
+}
+
+
+                                                            /* 3)Footer */
+
+.footer-row{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.footer-copyright{
+    opacity: .6;
+}
+
+.footer-social{
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.footer-social li{
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+/* Уменьшаем opacity*/
+.footer-social a{
+    opacity: .6;
+}
+
+/*При наведении opacity будет 100%*/
+.footer-social a:hover{
+    opacity: 1;
+}
+
+/*Установим значение ширины для иконок*/
+.footer-social img{
+    max-width: 18%;
+}
